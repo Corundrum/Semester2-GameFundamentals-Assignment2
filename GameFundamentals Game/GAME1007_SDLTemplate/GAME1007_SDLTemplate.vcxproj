@@ -140,43 +140,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathManager.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="States.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="LoseState.h" />
     <ClInclude Include="MathManager.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="TextureManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="bat.png" />
-    <Image Include="Fireball.png" />
-    <Image Include="LoseTitle.png" />
-    <Image Include="MainMenuButton.png" />
-    <Image Include="ResumeButton.png" />
-    <Image Include="sky_clouds.jpg" />
-    <Image Include="StartGameButton.png" />
-    <Image Include="TitleName.png" />
-    <Image Include="WinTitle.png" />
-    <Image Include="witch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="audio\batfire.wav" />
-    <Media Include="audio\death.wav" />
-    <Media Include="audio\spook4.mp3" />
-    <Media Include="audio\witchfire.wav" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

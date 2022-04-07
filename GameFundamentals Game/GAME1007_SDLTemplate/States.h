@@ -6,6 +6,7 @@
 #include <vector>
 #include <SDL_mixer.h>
 #include <SDL_image.h>
+#include <iostream>
 
 //STATE
 class State
@@ -20,69 +21,4 @@ public:
 	virtual void Resume() {};
 };
 
-//START SCENE
-class MenuState : public State
-{
-private:
-
-public:
-	MenuState();
-	virtual void Enter();
-	virtual void Update();
-	virtual void Render();
-	virtual void Exit();
-};
-
-//LOSE SCENE
-class LoseState : public State
-{
-private:
-
-public:
-	LoseState();
-	virtual void Enter();
-	virtual void Update();
-	virtual void Render();
-	virtual void Exit();
-};
-
-//WIN SCENE
-class WinState : public State
-{
-private:
-	
-public:
-	WinState();
-	virtual void Enter();
-	virtual void Update();
-	virtual void Render();
-	virtual void Exit();
-};
-
-//PAUSE SCENE
-class PauseState : public State
-{
-private:
-	
-public:
-	PauseState();
-	virtual void Enter();
-	virtual void Update();
-	virtual void Render();
-	virtual void Exit();
-};
-
-//PLAY SCENE
-class GameState : public State
-{
-private:
-
-public:
-	GameState();
-	virtual void Enter();
-	virtual void Update();
-	virtual void Render();
-	virtual void Exit();
-	virtual void Resume();
-};
 #endif

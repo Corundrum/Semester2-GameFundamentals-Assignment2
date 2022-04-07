@@ -1,2 +1,10 @@
-﻿  States.cpp
-  GAME1007_SDLTemplate.vcxproj -> E:\Visual Studio Files\Game Fundamentals\Game1017_A2_SeredaSimon\GameFundamentals Game\Debug\GAME1007_SDLTemplate.exe
+﻿  Engine.cpp
+  GameState.cpp
+  LoseState.cpp
+  MenuState.cpp
+  PauseState.cpp
+  StateManager.cpp
+  States.cpp
+  WinState.cpp
+  Generating Code...
+  GAME1007_SDLTemplate.vcxproj -> E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\Debug\GAME1007_SDLTemplate.exe

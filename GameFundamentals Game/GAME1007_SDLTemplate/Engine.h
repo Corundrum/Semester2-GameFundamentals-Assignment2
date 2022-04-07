@@ -49,4 +49,3 @@ public: // public method prototyples
 
 #endif
 
-// Reminder: you can ONLY have declarations (of variables and functions) in headers. What we have here is fine.
