@@ -1,5 +1,8 @@
 #include "Engine.h"
 #include "StateManager.h"
+#include "EventManager.h"
+#include "TextureManager.h"
+#include "SoundManager.h"
 #include "States.h"
 #include "MenuState.h"
 
@@ -16,6 +19,13 @@ int Engine::Init(const char* title, int xPos, int yPos, int width, int height, i
 		{
 			//Create Renderer
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, NULL);
+			if (m_pRenderer != nullptr)
+			{
+				TEMA::Init();
+				EVMA::Init();
+				SOMA::Init();
+			}
+			else return false;
 		}
 		else return false;
 	}
@@ -41,30 +51,12 @@ void Engine::Wake()
 
 void Engine::HandleEvents()
 {
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			m_running = false;
-			break;
-		}
-	}
-}
-
-bool Engine::KeyDown(SDL_Scancode c)
-{
-	if (m_keystates != nullptr)
-	{
-		if (m_keystates[c] == 1)
-			return true;
-	}
-	return false;
+	EVMA::HandleEvents();
 }
 
 void Engine::Update()
 {
+	
 	STMA::Update();
 }
 
@@ -123,13 +115,12 @@ void Engine::Clean()
 	cout << "Cleaning engine..." << endl;
 	
 	STMA::Quit();
-
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_DestroyWindow(m_pWindow);
+	TEMA::Quit();
+	EVMA::Quit();
+	SOMA::Quit();
 
-	Mix_CloseAudio();
-
-	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

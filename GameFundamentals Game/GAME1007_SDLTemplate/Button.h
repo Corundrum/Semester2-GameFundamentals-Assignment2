@@ -15,12 +15,11 @@ public:
 	void Update();
 	void Clean();
 
-	bool GetClickOver();
-	bool GetMouseOver();
+	bool ButtonPressed() { return m_click; }
 
 private:
 	bool m_click = false;
-	bool m_mouse_over = false;
+	bool m_mouseOver = false;
 
 	std::string m_key;
 	SDL_Rect m_src;

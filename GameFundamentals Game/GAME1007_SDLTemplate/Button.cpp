@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "TextureManager.h"
 #include "EventManager.h"
+#include "CollisionManager.h"
 
 
 
@@ -26,20 +27,35 @@ void Button::Draw()
 
 void Button::Update()
 {
+	if (m_click)
+	{
+		m_click = false;
+	}
+
+	if (COMA::PointAABBCheck(EVMA::GetMousePos(), m_dst))
+	{
+		if (!m_mouseOver)
+		{
+			SDL_SetTextureAlphaMod(TEMA::GetTexture(m_key), 127);
+			m_mouseOver = true;
+		}
+
+		if (EVMA::MousePressed(SDL_BUTTON_LEFT))
+		{
+			if (!m_click)
+			{
+				m_click = true;
+			}
+		}
+	}
+	else if (m_mouseOver)
+	{
+		SDL_SetTextureAlphaMod(TEMA::GetTexture(m_key), 255);
+		m_mouseOver = false;
+	}
 
 }
-
 void Button::Clean()
 {
 
-}
-
-bool Button::GetClickOver()
-{
-	return m_click;
-}
-
-bool Button::GetMouseOver()
-{
-	return m_mouse_over;
 }
