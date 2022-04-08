@@ -37,14 +37,26 @@ void GameState::Update()
 	for (auto background : m_pBackgroundDsts)
 	{
 		background->x -= 4;
+		if (background->x + background->w <= 0)
+		{
+			background->x = WINDOW_WIDTH;
+		}
 	}
 	for (auto midground : m_pMidgroundDsts)
 	{
 		midground->x -= 5;
+		if (midground->x + midground->w <= 0)
+		{
+			midground->x = WINDOW_WIDTH - 5;
+		}
 	}
 	for (auto foreground : m_pForegroundDsts)
 	{
 		foreground->x -= 7;
+		if (foreground->x + foreground->w <= 0)
+		{
+			foreground->x = WINDOW_WIDTH - 6;
+		}
 	}
 }
 
