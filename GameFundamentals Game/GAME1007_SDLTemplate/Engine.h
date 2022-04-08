@@ -8,8 +8,8 @@
 #include <ctime>
 
 #define FPS 60
-#define WIDTH 1024
-#define HEIGHT 768
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
 #define SPEED 5
 using namespace std;
 

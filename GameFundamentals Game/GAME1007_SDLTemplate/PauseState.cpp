@@ -22,7 +22,7 @@ void PauseState::Render()
 
 	SDL_SetRenderDrawBlendMode(Engine::Instance().GetRenderer(), SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(Engine::Instance().GetRenderer(), 0, 0, 0, 64);
-	SDL_Rect rect = { 0, 0, WIDTH, HEIGHT };
+	SDL_Rect rect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
 	SDL_RenderFillRect(Engine::Instance().GetRenderer(), &rect);
 
 	State::Render();

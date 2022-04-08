@@ -13,6 +13,7 @@ public: // Public methods.
 	static void Init();
 	static void Load(const char* path, const std::string key);
 	static void Unload(const std::string key);
+	static void DrawImg(std::string key, int xPos, int yPos);
 	static SDL_Texture* GetTexture(const std::string key);
 	static void Quit();
 

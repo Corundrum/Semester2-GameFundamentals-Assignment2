@@ -33,6 +33,18 @@ void TextureManager::Unload(const std::string key)
 		std::cout << "Could not unload '" << key << "' - id not found!" << std::endl;
 }
 
+void TextureManager::DrawImg(std::string key, int xPos, int yPos)
+{
+	SDL_Rect src, dst;
+
+	int w, h;
+	SDL_QueryTexture(TEMA::GetTexture(key), nullptr, nullptr, &w, &h);
+	src = { 0,0,w,h };
+	dst = { xPos, yPos, w, h };
+
+	SDL_RenderCopy(Engine::Instance().GetRenderer(), GetTexture(key), &src, &dst);
+}
+
 SDL_Texture* TextureManager::GetTexture(const std::string key) { return s_textures[key]; }
 
 void TextureManager::Quit()

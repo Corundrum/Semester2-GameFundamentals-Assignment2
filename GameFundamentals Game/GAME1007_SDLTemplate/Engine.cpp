@@ -14,7 +14,7 @@ int Engine::Init(const char* title, int xPos, int yPos, int width, int height, i
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		//Create Window
-		m_pWindow = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
+		m_pWindow = SDL_CreateWindow(title, xPos, yPos, WINDOW_WIDTH, WINDOW_HEIGHT, flags);
 		if (m_pWindow != nullptr)
 		{
 			//Create Renderer
@@ -86,7 +86,7 @@ int Engine::Run()
 		return 1;
 	}
 	// Start and run the "engine"
-	if (Init("GAME1007 M2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, NULL) == false)
+	if (Init("GAME1007 M2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, NULL) == false)
 	{
 		return 2;
 	}

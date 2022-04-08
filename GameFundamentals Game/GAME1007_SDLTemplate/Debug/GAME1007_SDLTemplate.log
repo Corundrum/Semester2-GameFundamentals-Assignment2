@@ -1,5 +1,6 @@
-﻿  Button.cpp
-  Engine.cpp
-  MenuState.cpp
-  Generating Code...
+﻿  MenuState.cpp
+E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\MenuState.cpp(13,122): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\MenuState.cpp(13,95): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\MenuState.cpp(30,77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\MenuState.cpp(30,49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GAME1007_SDLTemplate.vcxproj -> E:\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\Debug\GAME1007_SDLTemplate.exe
