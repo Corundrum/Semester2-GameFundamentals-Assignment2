@@ -1,6 +1,9 @@
 #include "GameState.h"
 #include "Engine.h"
 #include "TextureManager.h"
+#include "Player.h"
+#include "CollisionManager.h"
+
 
 GameState::GameState() {}
 
@@ -15,10 +18,10 @@ void GameState::Enter()
 		m_pObstacles.push_back(new Box({ 128 * i, 384 }));
 	}
 
-	m_pObstaclePrototypes.emplace("dumpster fire", new Box({ 1024, 384 }, true, { 1048, 394, 48, 128 }, { 0, 0, 38, 84 }));
-	m_pObstaclePrototypes.emplace("ladders", new Box({ 1024, 384 }, true, { 1056, 0, 31, 384 }, { 65, 0, 31, 384 }));
-	m_pObstaclePrototypes.emplace("road blocks", new Box({ 1024, 384 }, true, { 1024, 454, 128, 64 }, { 0, 384, 128, 64 }));
-	m_pObstaclePrototypes.emplace("broken bottles", new Box({ 1024, 384 }, true, { 1056, 486, 64, 35 }, { 0, 96, 64, 35 }));
+	m_pObstaclePrototypes.emplace("dumpster fire", new Box({ 1024, 384 }, true, { 1048, 420, 48, 128 }, { 0, 0, 38, 84 }));
+	m_pObstaclePrototypes.emplace("ladders", new Box({ 1024, 384 }, true, { 1056, 0, 31, 464 }, { 65, 0, 31, 384 }));
+	m_pObstaclePrototypes.emplace("road blocks", new Box({ 1024, 384 }, true, { 1024, 432, 64, 128 }, { 0, 340, 64, 112 }));
+	m_pObstaclePrototypes.emplace("broken bottles", new Box({ 1024, 384 }, true, { 1056, 500, 64, 35 }, { 0, 96, 64, 35 }));
 
 	m_gapCtr = 0;
 	m_gapMax = 3;
@@ -48,10 +51,24 @@ void GameState::Enter()
 
 	TEMA::Load("images/placeHolderBG.png", "background");
 	TEMA::Load("images/obstacles.png", "obstacles");
+
+
+	m_pPlayer = new Player({ 0,0,128,128 }, { 288,480,128,128 });
 }
 
 void GameState::Update()
 {
+	m_pPlayer->Update();
+
+	if (m_pPlayer->GetDst()->y >= 420)
+	{
+		m_pPlayer->StopY();
+		m_pPlayer->SetY(420);
+		m_pPlayer->SetGrounded(true);
+	}
+
+
+
 	//Obstacles
 	if (m_pObstacles[0]->GetPos().x <= -128)
 	{
@@ -122,6 +139,8 @@ void GameState::Render()
 	{
 		obstacle->Render();
 	}
+
+	m_pPlayer->Render();
 
 }
 

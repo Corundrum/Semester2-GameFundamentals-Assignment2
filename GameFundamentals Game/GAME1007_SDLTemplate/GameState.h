@@ -7,6 +7,7 @@
 
 #include "Box.h"
 #include "States.h"
+#include "Player.h"
 
 class GameState : public State
 {
@@ -19,6 +20,7 @@ public:
 	virtual void Resume();
 
 private:
+	Player* m_pPlayer;
 
 	std::vector<SDL_Rect*> m_pBackgroundSrcs;
 	std::vector<SDL_Rect*> m_pBackgroundDsts;
