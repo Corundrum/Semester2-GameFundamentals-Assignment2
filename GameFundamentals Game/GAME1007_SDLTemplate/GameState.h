@@ -8,6 +8,8 @@
 #include "Box.h"
 #include "States.h"
 #include "Player.h"
+#include "Timer.h"
+#include "Primitives.h"
 
 class GameState : public State
 {
@@ -21,6 +23,9 @@ public:
 
 private:
 	Player* m_pPlayer;
+
+	Label* m_plable;
+	Timer m_timer;
 
 	std::vector<SDL_Rect*> m_pBackgroundSrcs;
 	std::vector<SDL_Rect*> m_pBackgroundDsts;

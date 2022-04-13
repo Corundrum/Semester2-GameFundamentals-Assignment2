@@ -1,12 +1,14 @@
 #include "Player.h"
 #include "EventManager.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include <cmath>
 
 Player::Player(SDL_Rect s, SDL_FRect d) : AnimatedSpriteObject(s, d), m_state(STATE_JUMPING), m_isGrounded(false), m_isFacingLeft(false),
 m_maxVelX(9.0), m_maxVelY(JUMPFORCE), m_grav(GRAVITY), m_drag(0.85)
 {
 	TEMA::Load("images/Player.png", "player");
+	SOMA::Load("audio/jump.wav", "jump", SOUND_SFX);
 	m_accelX = m_accelY = m_velX = m_velY = 0.0;
 	m_Hitbox = m_dst;
 }
@@ -36,6 +38,7 @@ void Player::Update()
 		//Transition to Jump
 		if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
 		{
+			SOMA::PlaySound("jump");
 			m_accelY = -JUMPFORCE;
 			m_isGrounded = false;
 			m_state = STATE_JUMPING;

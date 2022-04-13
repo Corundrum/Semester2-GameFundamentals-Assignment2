@@ -7,6 +7,8 @@
 #include "LoseState.h"
 #include "EventManager.h"
 #include "PauseState.h"
+#include "FontManager.h"
+#include "SoundManager.h"
 
 
 GameState::GameState() {}
@@ -14,7 +16,8 @@ GameState::GameState() {}
 void GameState::Enter()
 {
 	std::cout << "entering Test Play State..." << std::endl;
-	
+	FOMA::Load("image/ltype.TTF", "Label", 24);
+
 	//Obstacles
 	m_pObstacles.reserve(9);
 	for (int i = 0; i < 9; i++)
@@ -55,9 +58,11 @@ void GameState::Enter()
 
 	TEMA::Load("images/placeHolderBG.png", "background");
 	TEMA::Load("images/obstacles.png", "obstacles");
-
+	SOMA::Load("audio/death.wav", "death", SOUND_SFX);
 
 	m_pPlayer = new Player({ 0,0,128,128 }, { 288,480,128,128 });
+
+	m_timer.Start();
 }
 
 void GameState::Update()
@@ -83,6 +88,8 @@ void GameState::Update()
 
 	if (m_pPlayer->GetState() != STATE_DEATH)
 	{
+		m_timer.Update();
+
 		if (EVMA::KeyPressed(SDL_SCANCODE_P))
 		{
 			STMA::PushState(new PauseState());
@@ -94,6 +101,7 @@ void GameState::Update()
 			if (COMA::AABBCheck(obstacle->m_Hitbox, m_pPlayer->m_Hitbox))
 			{
 				m_pPlayer->SetState(STATE_DEATH);
+				SOMA::PlaySound("death");
 			}
 		}
 
@@ -182,6 +190,12 @@ void GameState::Render()
 	}
 
 	m_pPlayer->Render();
+
+	if (m_timer.HasChanged())
+	{
+		system("cls");
+		cout << m_timer.GetTime();
+	}
 
 }
 

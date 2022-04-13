@@ -5,6 +5,7 @@
 #include "SoundManager.h"
 #include "States.h"
 #include "MenuState.h"
+#include "FontManager.h"
 
 int Engine::Init(const char* title, int xPos, int yPos, int width, int height, int flags)
 {
