@@ -31,6 +31,7 @@ private:
 	std::map<std::string, Box*> m_pObstaclePrototypes;
 	std::string m_keys[4] = { "dumpster fire", "ladders", "road blocks", "broken bottles" };
 	int m_gapCtr, m_gapMax;
+	float count = 0;
 };
 
 

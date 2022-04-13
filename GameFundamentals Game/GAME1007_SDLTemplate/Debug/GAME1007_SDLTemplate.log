@@ -1,3 +1,5 @@
 ﻿  GameState.cpp
-D:\Programming and School\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\GameState.cpp(143,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+D:\Programming and School\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\GAME1007_SDLTemplate\GameState.cpp(150,43): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  PauseState.cpp
+  Generating Code...
   GAME1007_SDLTemplate.vcxproj -> D:\Programming and School\Visual Studio Files\Game1017_A2_SeredaSimon\GameFundamentals Game\Debug\GAME1007_SDLTemplate.exe

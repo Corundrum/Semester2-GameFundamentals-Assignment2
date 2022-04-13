@@ -3,17 +3,19 @@
 #define __LOSE_STATE__
 
 #include "States.h"
+#include "Button.h"
 
 class LoseState : public State
 {
-private:
-
 public:
 	LoseState();
 	virtual void Enter();
 	virtual void Update();
 	virtual void Render();
 	virtual void Exit();
+
+private:
+	Button* m_pMainMenuButton;
 };
 
 #endif // !__LOSE_STATE__

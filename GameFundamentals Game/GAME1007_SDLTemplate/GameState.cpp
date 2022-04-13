@@ -5,6 +5,8 @@
 #include "CollisionManager.h"
 #include "StateManager.h"
 #include "LoseState.h"
+#include "EventManager.h"
+#include "PauseState.h"
 
 
 GameState::GameState() {}
@@ -81,6 +83,12 @@ void GameState::Update()
 
 	if (m_pPlayer->GetState() != STATE_DEATH)
 	{
+		if (EVMA::KeyPressed(SDL_SCANCODE_P))
+		{
+			STMA::PushState(new PauseState());
+		}
+
+
 		for (auto obstacle : m_pObstacles)
 		{
 			if (COMA::AABBCheck(obstacle->m_Hitbox, m_pPlayer->m_Hitbox))
@@ -138,7 +146,6 @@ void GameState::Update()
 	}
 	if (m_pPlayer->GetState() == STATE_DEATH)
 	{
-		static float count = 0;
 
 		count += Engine::Instance().GetDeltaTime();
 		

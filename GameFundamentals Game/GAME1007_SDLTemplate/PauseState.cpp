@@ -1,6 +1,7 @@
 #include "PauseState.h"
 #include "StateManager.h"
 #include "Engine.h"
+#include "EventManager.h"
 
 
 PauseState::PauseState() {}
@@ -12,7 +13,10 @@ void PauseState::Enter()
 
 void PauseState::Update()
 {
-
+	if (EVMA::KeyPressed(SDL_SCANCODE_P))
+	{
+		STMA::PopState();
+	}
 
 }
 

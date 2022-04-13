@@ -34,5 +34,9 @@ void MenuState::Render()
 
 void MenuState::Exit()
 {
+
+	delete m_pStartButton;
+	m_pStartButton = nullptr;
+	TEMA::Unload("start_button");
 	std::cout << "Exiting Start State..." << std::endl;
 }

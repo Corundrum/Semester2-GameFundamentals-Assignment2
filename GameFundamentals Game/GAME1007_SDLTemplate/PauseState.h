@@ -6,14 +6,15 @@
 
 class PauseState : public State
 {
-private:
-
 public:
 	PauseState();
 	virtual void Enter();
 	virtual void Update();
 	virtual void Render();
 	virtual void Exit();
+
+private:
+
 };
 
 #endif // !__PAUSE_STATE__
