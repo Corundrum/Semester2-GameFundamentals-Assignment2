@@ -14,22 +14,6 @@ void Player::Update()
 {
 	switch (m_state)
 	{
-	case STATE_IDLING:
-		//Transition to Run
-		if (EVMA::KeyPressed(SDL_SCANCODE_A) || EVMA::KeyPressed(SDL_SCANCODE_D))
-		{
-			m_state = STATE_RUNNING;
-			SetAnimation(4, 0, 4);
-		}
-		//Transition to Jump
-		else if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
-		{
-			m_accelY = -JUMPFORCE;
-			m_isGrounded = false;
-			m_state = STATE_JUMPING;
-			SetAnimation(4, 8, 9);
-		}
-		break;
 	case STATE_RUNNING:
 		//Move on ground
 		if (EVMA::KeyHeld(SDL_SCANCODE_A))
@@ -44,32 +28,32 @@ void Player::Update()
 			if (m_isFacingLeft)
 				m_isFacingLeft = false;
 		}
-		//Transition to Idle
-		if (!EVMA::KeyHeld(SDL_SCANCODE_A) && !EVMA::KeyHeld(SDL_SCANCODE_D))
-		{
-			m_state = STATE_IDLING;
-			SetAnimation(4, 0, 1);
-		}
 		//Transition to Jump
-		else if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
+		if (EVMA::KeyPressed(SDL_SCANCODE_SPACE) && m_isGrounded)
 		{
 			m_accelY = -JUMPFORCE;
 			m_isGrounded = false;
 			m_state = STATE_JUMPING;
 			SetAnimation(4, 8, 9);
 		}
+		//transition to ducking
+		else if (EVMA::KeyPressed(SDL_SCANCODE_S) && m_isGrounded)
+		{
+			m_state = STATE_DUCKING;
+			SetAnimation(4, 0, 4, 128);
+		}
 		break;
 	case STATE_JUMPING:
 		//move in mid air
 		if (EVMA::KeyHeld(SDL_SCANCODE_A) && m_dst.x > 0)
 		{
-			m_accelX = -1.5;
+			m_accelX = -1.0;
 			if (!m_isFacingLeft)
 				m_isFacingLeft = true;
 		}
 		else if (EVMA::KeyHeld(SDL_SCANCODE_D) && m_dst.x > WINDOW_WIDTH - m_dst.w)
 		{
-			m_accelX = 1.5;
+			m_accelX = 1.0;
 			if (m_isFacingLeft)
 				m_isFacingLeft = false;
 		}
@@ -79,6 +63,16 @@ void Player::Update()
 			m_state = STATE_RUNNING;
 			SetAnimation(4, 0, 4);
 		}
+		break;
+	case STATE_DUCKING:
+		//ducking
+		if (EVMA::KeyReleased(SDL_SCANCODE_S))
+		{
+			m_state = STATE_RUNNING;
+			SetAnimation(4, 0, 4);
+
+		}
+
 		break;
 	}
 

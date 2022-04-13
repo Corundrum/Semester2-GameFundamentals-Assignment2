@@ -3,10 +3,10 @@
 #define __PLAYER_H__
 
 #include "GameObject.h"
-#define GRAVITY 2.0
-#define JUMPFORCE 25.0 // Upward Y force.
+#define GRAVITY 1.1
+#define JUMPFORCE 20.0 // Upward Y force.
 
-enum PlayerState { STATE_IDLING, STATE_RUNNING, STATE_JUMPING };
+enum PlayerState { STATE_DUCKING, STATE_RUNNING, STATE_JUMPING };
 
 class Player : public AnimatedSpriteObject
 {
