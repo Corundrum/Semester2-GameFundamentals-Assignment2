@@ -3,6 +3,8 @@
 #include "TextureManager.h"
 #include "Player.h"
 #include "CollisionManager.h"
+#include "StateManager.h"
+#include "LoseState.h"
 
 
 GameState::GameState() {}
@@ -66,55 +68,87 @@ void GameState::Update()
 		m_pPlayer->SetY(420);
 		m_pPlayer->SetGrounded(true);
 	}
-
-
-
-	//Obstacles
-	if (m_pObstacles[0]->GetPos().x <= -128)
+	if (m_pPlayer->GetDst()->x <= 0)
 	{
-		// pop the first element off.
-		delete m_pObstacles[0]; // deallocates box.
-		m_pObstacles.erase(m_pObstacles.begin()); // "pop_front"
-		//add a new box to the end.
-		if (m_gapCtr++ % m_gapMax == 0)
-		{
-			m_pObstacles.push_back(m_pObstaclePrototypes[m_keys[rand() % 4]]->Clone()); // instead of this pick a random clone from map of Box*
-		}
-		else
-		{
-			m_pObstacles.push_back(new Box({ 1024, 384 }));
-		}
+		m_pPlayer->StopX();
+		m_pPlayer->SetX(1);
 	}
-	for (auto obstacle : m_pObstacles)
+	if (m_pPlayer->GetDst()->x + m_pPlayer->GetDst()->w >= WINDOW_WIDTH)
 	{
-		obstacle->Update();
+		m_pPlayer->StopX();
+		m_pPlayer->SetX(WINDOW_WIDTH - m_pPlayer->GetDst()->w - 1);
 	}
 
-	//Move the Backgrounds
-	for (auto background : m_pBackgroundDsts)
+	if (m_pPlayer->GetState() != STATE_DEATH)
 	{
-		background->x -= 4;
-		if (background->x + background->w <= 0)
+		for (auto obstacle : m_pObstacles)
 		{
-			background->x = WINDOW_WIDTH;
+			if (COMA::AABBCheck(obstacle->m_Hitbox, m_pPlayer->m_Hitbox))
+			{
+				m_pPlayer->SetState(STATE_DEATH);
+			}
+		}
+
+		//Obstacles
+		if (m_pObstacles[0]->GetPos().x <= -128)
+		{
+			// pop the first element off.
+			delete m_pObstacles[0]; // deallocates box.
+			m_pObstacles.erase(m_pObstacles.begin()); // "pop_front"
+			//add a new box to the end.
+			if (m_gapCtr++ % m_gapMax == 0)
+			{
+				m_pObstacles.push_back(m_pObstaclePrototypes[m_keys[rand() % 4]]->Clone()); // instead of this pick a random clone from map of Box*
+			}
+			else
+			{
+				m_pObstacles.push_back(new Box({ 1024, 384 }));
+			}
+		}
+		for (auto obstacle : m_pObstacles)
+		{
+			obstacle->Update();
+		}
+
+		//Move the Backgrounds
+		for (auto background : m_pBackgroundDsts)
+		{
+			background->x -= 4;
+			if (background->x + background->w <= 0)
+			{
+				background->x = WINDOW_WIDTH;
+			}
+		}
+		for (auto midground : m_pMidgroundDsts)
+		{
+			midground->x -= 5;
+			if (midground->x + midground->w <= 0)
+			{
+				midground->x = WINDOW_WIDTH - 5;
+			}
+		}
+		for (auto foreground : m_pForegroundDsts)
+		{
+			foreground->x -= 7;
+			if (foreground->x + foreground->w <= 0)
+			{
+				foreground->x = WINDOW_WIDTH - 6;
+			}
 		}
 	}
-	for (auto midground : m_pMidgroundDsts)
+	if (m_pPlayer->GetState() == STATE_DEATH)
 	{
-		midground->x -= 5;
-		if (midground->x + midground->w <= 0)
+		static float count = 0;
+
+		count += Engine::Instance().GetDeltaTime();
+		
+		if (count >= 1)
 		{
-			midground->x = WINDOW_WIDTH - 5;
+			STMA::ChangeState(new LoseState());
 		}
+
 	}
-	for (auto foreground : m_pForegroundDsts)
-	{
-		foreground->x -= 7;
-		if (foreground->x + foreground->w <= 0)
-		{
-			foreground->x = WINDOW_WIDTH - 6;
-		}
-	}
+
 }
 
 void GameState::Render()
@@ -177,6 +211,9 @@ void GameState::Exit()
 	}
 	m_pBackgroundSrcs.clear();
 	m_pBackgroundSrcs.shrink_to_fit();
+
+	delete m_pPlayer;
+	m_pPlayer = nullptr;
 }
 
 void GameState::Resume()

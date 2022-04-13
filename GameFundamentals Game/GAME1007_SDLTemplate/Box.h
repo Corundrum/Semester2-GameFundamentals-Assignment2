@@ -28,6 +28,8 @@ public:
 	void Render();
 	const SDL_Point GetPos() { return m_pos; }
 
+	SDL_Rect m_Hitbox;
+
 private:
 	SDL_Point m_pos; // position on screen. Y is optional
 	Obstacle* m_pSprite; // pointer to a dynamic sprite object

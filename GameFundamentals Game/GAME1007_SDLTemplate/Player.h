@@ -6,7 +6,7 @@
 #define GRAVITY 1.1
 #define JUMPFORCE 20.0 // Upward Y force.
 
-enum PlayerState { STATE_DUCKING, STATE_RUNNING, STATE_JUMPING };
+enum PlayerState { STATE_DUCKING, STATE_RUNNING, STATE_JUMPING, STATE_DEATH };
 
 class Player : public AnimatedSpriteObject
 {
@@ -29,7 +29,13 @@ public:
 	double GetVelX();
 	double GetVelY();
 
+	PlayerState GetState() { return m_state; }
+	void SetState(PlayerState state) { m_state = state; }
+
+	SDL_FRect m_Hitbox;
+
 private:
+
 	bool m_isGrounded, m_isFacingLeft;
 
 	double m_accelX, m_accelY,

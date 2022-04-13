@@ -8,6 +8,7 @@ m_maxVelX(9.0), m_maxVelY(JUMPFORCE), m_grav(GRAVITY), m_drag(0.85)
 {
 	TEMA::Load("images/Player.png", "player");
 	m_accelX = m_accelY = m_velX = m_velY = 0.0;
+	m_Hitbox = m_dst;
 }
 
 void Player::Update()
@@ -15,6 +16,10 @@ void Player::Update()
 	switch (m_state)
 	{
 	case STATE_RUNNING:
+		m_Hitbox.x = m_dst.x + 12;
+		m_Hitbox.y = m_dst.y;
+		m_Hitbox.w = m_dst.w - 24;
+		m_Hitbox.h = m_dst.h;
 		//Move on ground
 		if (EVMA::KeyHeld(SDL_SCANCODE_A))
 		{
@@ -44,6 +49,10 @@ void Player::Update()
 		}
 		break;
 	case STATE_JUMPING:
+		m_Hitbox.x = m_dst.x + 12;
+		m_Hitbox.y = m_dst.y;
+		m_Hitbox.w = m_dst.w - 24;
+		m_Hitbox.h = m_dst.h - 32;
 		//move in mid air
 		if (EVMA::KeyHeld(SDL_SCANCODE_A) && m_dst.x > 0)
 		{
@@ -65,16 +74,24 @@ void Player::Update()
 		}
 		break;
 	case STATE_DUCKING:
+		m_Hitbox.x = m_dst.x + 12;
+		m_Hitbox.y = m_dst.y + 64;
+		m_Hitbox.w = m_dst.w - 24;
+		m_Hitbox.h = m_dst.h - 96;
 		//ducking
 		if (EVMA::KeyReleased(SDL_SCANCODE_S))
 		{
 			m_state = STATE_RUNNING;
 			SetAnimation(4, 0, 4);
-
 		}
 
 		break;
+	case STATE_DEATH:
+		SetAnimation(4, 4, 8, 128);
+		break;
 	}
+	
+
 
 	//PLAYER MOVEMENT
 	m_velX += m_accelX;

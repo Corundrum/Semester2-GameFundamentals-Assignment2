@@ -20,6 +20,7 @@ Box::Box(const SDL_Point p, bool makeSprite, const SDL_Rect r, const SDL_Rect c)
         // m_pSprite = new Obstacle[m_numSprites]; // for dynamic array.
         m_pSprite = new Obstacle(r, c);
     }
+    m_Hitbox = r;
 }
 
 Box::~Box()
@@ -43,7 +44,13 @@ void Box::Update()
     if (m_pSprite != nullptr)
     {
         m_pSprite->m_dst.x -= SCROLLSPEED;
+        m_Hitbox.x = m_pSprite->m_dst.x + 12;
+        m_Hitbox.y = m_pSprite->m_dst.y + 12;
+        m_Hitbox.w = m_pSprite->m_dst.w - 24;
+        m_Hitbox.h = m_pSprite->m_dst.h - 24;
+
     }
+  
 }
 
 void Box::Render()
